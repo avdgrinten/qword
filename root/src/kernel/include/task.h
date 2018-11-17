@@ -76,6 +76,11 @@ struct thread_t {
     uint8_t fxstate[512] __attribute__((aligned(16)));
 };
 
+#define AT_ENTRY 10
+#define AT_PHDR 20
+#define AT_PHENT 21
+#define AT_PHNUM 22
+
 struct auxval_t {
     size_t at_entry;
     size_t at_phdr;
@@ -103,7 +108,7 @@ void init_sched(void);
 
 void yield(uint64_t);
 
-tid_t task_tcreate(pid_t, void *(*)(void *), void *);
+tid_t task_tcreate(pid_t, void *(*)(), const struct auxval_t *auxv);
 pid_t task_pcreate(struct pagemap_t *);
 int task_tkill(pid_t, tid_t);
 

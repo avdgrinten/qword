@@ -45,6 +45,7 @@ void *syscall_alloc_at(struct ctx_t *ctx) {
         void *ptr = pmm_alloc(1);
         if (!ptr)
             return (void *)0;
+//        kprint(KPRN_INFO, "Mapping %X to %X", ptr, base_address + i * PAGE_SIZE);
         if (map_page(process->pagemap, (size_t)ptr, base_address + i * PAGE_SIZE, 0x07))
             return (void *)0;
     }

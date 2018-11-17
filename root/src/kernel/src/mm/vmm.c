@@ -63,6 +63,8 @@ int map_page(struct pagemap_t *pagemap, size_t phys_addr, size_t virt_addr, size
 
     /* Set the entry as present and point it to the passed physical address */
     /* Also set the specified flags */
+//    if (pt[pt_entry] & 0x1)
+//        kprint(KPRN_WARN, "vmm: Page at %X is already mapped", virt_addr);
     pt[pt_entry] = (pt_entry_t)(phys_addr | flags);
 
     if ((size_t)pagemap->pml4 == read_cr3()) {
